@@ -1,0 +1,46 @@
+version: '3.8'
+networks:
+  app-tier:
+    driver: host
+      
+services:
+
+  api:
+    build: .
+      # dockerfile: ./Dockerfile
+    image: ubuntu
+    # env_file:
+    #   - ./.env
+    # depends_on:
+    #   - mysqldb
+    stdin_open: true
+    tty: true
+    container_name: payviame
+    # networks:
+    # - app-tier
+    command: npm run dev
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - $PORT:$PORT
+    environment:
+      NPM_COMMAND: 'npm run dev'
+      DATABASE_HOST: host.docker.internal
+      #host.docker.internal
+    volumes:
+      - .:/usr/users-api
+      - /usr/users-api/node_modules
+      # - db-data:/var/lib/mysql
+  postgresql-db:
+    image: postgres:13-alpine
+  #   command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    container_name: pgsql
+    tty: true
+  #   stdin_open: true
+    ports:
+      - 5432:5432
+    networks:
+      - app-tier
+    environment:
+      POSTGRES_PASSWORD: ' '
