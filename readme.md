@@ -80,5 +80,5 @@ npm install
 ```
 ## To Run 
 ```
-docker-compose up
+docker-compose up --remove-orphans --build
 ```
