@@ -1,5 +1,4 @@
 env/dev.env
-env/prod.env
 env/defaults.env
 node_modules
 build
@@ -7,10 +6,6 @@ build.zip
 .history
 .vscode
 .env
-protected/*/**/*.png
-protected/*/**/*.jpg
-protected/*/**/*.jpeg
-protected/*/**/*.gif
 package-lock.json
 
 logs/errors/*.*

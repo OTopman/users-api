@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "predev": "cp ./env/dev.env .env",
+    "predev": "cp ./env/dev.env .env && npx prisma migrate dev --name init --schema=./src/prisma/schema.prisma",
     "dev": "nodemon -r tsconfig-paths/register ./src/server.ts"
   },
   "keywords": [],
@@ -55,4 +55,6 @@
     "xss-filters": "^1.2.7"
   }
 }
+
+
 

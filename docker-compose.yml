@@ -1,46 +1,36 @@
 version: '3.8'
-networks:
-  app-tier:
-    driver: host
-      
-services:
 
+services:
   api:
     build: .
-      # dockerfile: ./Dockerfile
-    image: ubuntu
-    # env_file:
-    #   - ./.env
-    # depends_on:
-    #   - mysqldb
+    env_file:
+      - ./.env
+    depends_on:
+      - postgresql-db
     stdin_open: true
     tty: true
-    container_name: payviame
-    # networks:
-    # - app-tier
-    command: npm run dev
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+    container_name: user-api
+    command: sh -c 'npm install && npm run dev'
     ports:
       - $PORT:$PORT
-    environment:
-      NPM_COMMAND: 'npm run dev'
-      DATABASE_HOST: host.docker.internal
-      #host.docker.internal
     volumes:
       - .:/usr/users-api
       - /usr/users-api/node_modules
-      # - db-data:/var/lib/mysql
+
+
   postgresql-db:
-    image: postgres:13-alpine
-  #   command: --default-authentication-plugin=mysql_native_password
+    image: postgres
     restart: always
-    container_name: pgsql
+    container_name: postgres
+    volumes:
+      - data:/data/db
     tty: true
-  #   stdin_open: true
     ports:
       - 5432:5432
-    networks:
-      - app-tier
     environment:
-      POSTGRES_PASSWORD: ' '
+      POSTGRES_PASSWORD: '@12!mypass'
+      POSTGRES_DB: 'usersDb'
+      DATABASE_URL: "postgresql://postgres:@12!mypass@postgresql-db:5432/usersDb?schema=public"
+
+volumes: 
+ data: {}

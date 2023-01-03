@@ -19,6 +19,6 @@ export default catchAsync(async (req: Request, res: Response, next: NextFunction
     return res.status(200).json({
         status: 'success',
         message: 'Records retrieved.',
-        data: users.map((user) => removeSensitiveData(user))
+        data: users.map((user: any) => removeSensitiveData(user))
     })
 });
