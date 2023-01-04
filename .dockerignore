@@ -1,5 +1,5 @@
 node_modules
-!nodes_modules/.prisma
+# !nodes_modules/.prisma
 .vscode
 .history
 build

@@ -4,7 +4,7 @@ The app uses
 2. Express as the HTTP package
 3. PostgreSQL as the Database
 
-The base URL http://127.0.0.1
+The base URL http://127.0.0.1:8000
 
 The app has two endpoints, which are:
 1. Create new user POST /api/v1/users

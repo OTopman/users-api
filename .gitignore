@@ -5,7 +5,7 @@ build
 build.zip
 .history
 .vscode
-.env
+# .env
 package-lock.json
 
 logs/errors/*.*
